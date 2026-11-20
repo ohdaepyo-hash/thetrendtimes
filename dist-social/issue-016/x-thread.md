@@ -11,7 +11,7 @@ A year ago developers told Sonar AI wrote or heavily assisted 42% of their commi
 
 This year's survey of 1,026 says 65% already. And 76% say they generate AI code faster than they can verify it.
 
-5 primary sources:
+Here is what the data says.
 
 ### 2/7
 
