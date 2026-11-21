@@ -52,7 +52,7 @@ And 30% of outcome-priced and 20% of usage-priced companies say customers self-p
 
 ### 7/7
 
-Exits: Acquire.com's webinar recap puts SaaS at about 3-5x profit. Pricing 20% above fair value drew about 2% serious buyer interest, 20% below about 92%.
+Exits: one marketplace's webinar recap puts SaaS at about 3-5x profit. Pricing 20% above fair value drew about 2% serious buyer interest, 20% below about 92%.
 
 Full breakdown: https://thetrendtimes.com/blog/micro-saas-economics-2026-pricing-churn-exits/
 
