@@ -1,6 +1,6 @@
 ---
 title: "AI Code Review 2026: Why Verification Became the Bottleneck"
-description: "AI writes 69.7% of code in one 227-company panel, yet 45% say review capacity drags delivery. See 2026 LeadDev, SlashData, Sourcegraph, and DX data."
+description: "AI writes 69.7% of code in a 227-company panel, yet 45% say review capacity drags delivery. See 2026 LeadDev, SlashData, Sourcegraph, and Atlassian data."
 pubDate: 2026-11-26
 category: sentiment
 sources:
@@ -22,7 +22,7 @@ Ask 377 engineers and engineering leaders what slows delivery now, and 45% name 
 
 You have probably felt this on your own team. Pull requests arrive faster and larger, the review queue grows, and the person approving a change often did not write any of it. The agent finished in minutes. The merge still waits on someone's afternoon.
 
-This piece puts six November 2026 sources side by side: four surveys, one telemetry index and one engineering benchmark. They measure different people with different definitions, so each number stays with its source. Read together, they describe one shift. The limit on AI-assisted delivery has moved from generating code to checking it, and teams that plan only for faster generation will keep missing dates. The last section is a checklist for measuring review capacity this week.
+This piece puts six November 2026 sources side by side: four surveys, one telemetry index and one vendor benchmark. They measure different people with different definitions, so each number stays with its source. Read together, they describe one shift. The limit on AI-assisted delivery has moved from generating code to checking it, and teams that plan only for faster generation will keep missing dates. The last section is a checklist for measuring review capacity this week.
 
 ## What 377 Reviewers Report About Code Review
 
@@ -34,7 +34,7 @@ That frame is narrower than a debate about trust. It is a capacity question. A t
 
 ## Why Delivery Slows When Generation Gets Faster
 
-SlashData asked the same question at a larger scale. Its 32nd Developer Survey drew 11,099 professional developers from 122 countries, and the results came out on November 12, 2026. 81% agree that AI reduces repetitive work but increases the need for review and verification. Two in five agree strongly, the strongest agreement anywhere in the survey ([SlashData](https://www.slashdata.co/research/faster-code-heavier-checks)).
+SlashData asked the same question at a larger scale. Its 32nd Developer Survey drew 11,099 professional developers from 122 countries, and the results came out on November 12, 2026. 81% agree that AI reduces repetitive work but increases the need for review and validation. Two in five agree strongly, the strongest agreement anywhere in the survey ([SlashData](https://www.slashdata.co/research/faster-code-heavier-checks)).
 
 The pressure comes from above. 76% say managers now expect more output from the same team size because of AI tools, and 68% report pressure to adopt tools before their value is clear ([SlashData](https://www.slashdata.co/research/faster-code-heavier-checks)). SlashData sums it up in one line: "AI makes code cheaper to write but not software cheaper to deliver." In its reading, the effort AI saves shows up again where people check AI output.
 
@@ -52,7 +52,7 @@ Atlassian also tracks AI spend per unit of output, where output is merged pull r
 
 The October rebound is one month of data, and the index's author says so: too early to call it a trend. One detail from that month fits the review story, though. Human pull request review volume grew faster in October than in the months before ([Atlassian](https://www.atlassian.com/blog/company-news/introducing-the-atlassian-ai-sdlc-index)). The post's own phrase is "cheaper code doesn't remove the bottleneck; it moves it."
 
-Time spent on innovation barely moved through all of this. It was 57.8% in October 2026 across 214 companies. From January 2025 (55.3%) to August 2026 (58.5%), it stayed within a band of about three points ([Atlassian](https://www.atlassian.com/blog/company-news/introducing-the-atlassian-ai-sdlc-index)). Two years of faster generation did not free much time for new work.
+Time spent on innovation barely moved through all of this. It was 57.8% in October 2026 across 214 companies, and it stayed between 54.9% and 58.5% from January 2025 through October 2026 ([Atlassian](https://www.atlassian.com/blog/company-news/introducing-the-atlassian-ai-sdlc-index)). Nearly two years of faster generation did not free much time for new work.
 
 ## What a 54% Rework Estimate Means for Review Queues
 
@@ -80,7 +80,7 @@ Review is also how junior developers used to learn. Adaptavist's New Developer R
 
 The career signals are mixed and mostly negative. Nearly half think AI is making software development a less attractive career. Three in ten say AI already hurts their career progress, and 44% say it makes core engineering skills less important. 43% report fewer learning opportunities, rising to 45% among experienced developers ([IT Pro](https://www.itpro.com/software/development/organizations-need-to-help-developers-grow-alongside-the-technology-dejected-devs-lament-career-prospects-amid-ai-advances)).
 
-Then there is the split by career stage. 44% of mid-career developers would remove AI from their workplace if they could, against 31% of early-career developers. Seven in ten worry that junior developers will come to rely on the technology too much, and the article discusses this as a "verification tax" ([IT Pro](https://www.itpro.com/software/development/organizations-need-to-help-developers-grow-alongside-the-technology-dejected-devs-lament-career-prospects-amid-ai-advances)). The tax is the checking work that comes with every AI output. A junior who can't yet judge the output pays it without learning from it.
+Then there is the split by career stage. 44% of mid-career developers would remove AI from their workplace if they could, against 31% of early-career developers. Seven in ten worry that junior developers will come to rely on the technology too much ([IT Pro](https://www.itpro.com/software/development/organizations-need-to-help-developers-grow-alongside-the-technology-dejected-devs-lament-career-prospects-amid-ai-advances)). The article also lists an ongoing "verification tax", which respondents described as spending more time reviewing and verifying code than before. The tax is the checking work that comes with every AI output. A junior who can't yet judge the output pays it without learning from it.
 
 Supervision has become part of the job. About 70% say monitoring and overseeing agents is now an explicit part of their daily role, and 82% regularly assign several agents to one task. After recent incidents, four in 10 review AI output more carefully, 29% want stronger human oversight and 21% plan to give agents less full autonomy ([IT Pro](https://www.itpro.com/software/development/organizations-need-to-help-developers-grow-alongside-the-technology-dejected-devs-lament-career-prospects-amid-ai-advances)).
 

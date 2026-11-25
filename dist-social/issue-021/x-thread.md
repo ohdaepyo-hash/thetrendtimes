@@ -18,7 +18,7 @@ Six November 2026 sources on code review as the bottleneck:
 
 SlashData, 11,099 developers in 122 countries:
 
-81% say AI cuts repetitive work but raises the need for review and verification.
+81% say AI cuts repetitive work but raises the need for review and validation.
 96% don't fully trust AI code to be correct.
 Only 48% always check it before they commit.
 
@@ -52,12 +52,13 @@ Bigger changes take longer to understand. The queue grows with them.
 
 ### 6/7
 
-Adaptavist surveyed 1,000 developers (via IT Pro):
+Adaptavist surveyed 1,000 developers:
 
-63% say AI reduced how much they learn by coding.
-Seven in ten worry juniors will lean on it too much, a cost the piece calls the verification tax.
+63% say AI cut how much they learn by coding. Seven in ten worry juniors lean on it too much.
 
-Juniors pay that tax without learning from it.
+The survey also reports a verification tax: more time reviewing code than before.
+
+Juniors pay it without learning from it.
 
 ### 7/7
 
