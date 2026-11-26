@@ -29,7 +29,7 @@ Below, each component gets a name, a request walks through them, and a November 
 
 Two years ago, an MCP deployment was a client and a server holding a session open. The 2026-07-28 release, the largest revision since launch, made servers stateless ([MCP Blog](https://blog.modelcontextprotocol.io/posts/mcp-turns-two/)). In the project's words, "Any request to an MCP server can now land on any server instance."
 
-An earlier issue covered the wire-level changes. The consequence matters here. A server instance remembers nothing between requests, so state moves into tool arguments, task handles and external stores.
+The wire-level changes are covered elsewhere. The consequence matters here. A server instance remembers nothing between requests, so state moves into tool arguments, task handles and external stores.
 
 That shift pushed work into new layers: skills for instructions, tasks for long jobs, forms for confirmations and gateways for enterprise rules.
 
@@ -52,7 +52,7 @@ Each layer below has a name you can find in a spec or an admin console.
 
 Here is the spreadsheet request, step by step.
 
-1. **The host client reads the prompt** and checks which servers are connected. If an admin approved a server through the Enterprise-Managed Authorization extension, the user is connected without a sign-in step.
+1. **The host client reads the prompt** and checks which servers are connected. If an admin approved a server through the Enterprise-Managed Authorization extension, the user connects automatically after signing in once.
 2. **Tool search picks the tools.** The client loads a few definitions instead of every server's full list. Anthropic says this can cut the context tool definitions use by over 85% in multi-server setups ([Anthropic](https://claude.com/resources/articles/skills-over-mcp-tasks-and-more)).
 3. **The skills library adds instructions.** Only the skill's name and description sat in context at startup. The full instructions load now because the task calls for them.
 4. **The stateless transport routes the call** to whichever server instance is free. The call carries all the state the server needs.
@@ -81,7 +81,7 @@ With Tasks, a server runs slow operations or a full agent loop in the background
 
 Elicitation, also generally available, covers the moment a server needs a human. It pauses, sends a form or link and continues where it left off. Supabase confirms costs before creating a paid project or running destructive SQL. GitHub makes users type a repository's name before an agent deletes it.
 
-File Uploads is still rolling out in Claude. It sends PDFs, spreadsheets and images to a server without passing them through the context window. On the protocol side, file upload and download is a working group draft, short of beta ([MCP Blog](https://blog.modelcontextprotocol.io/posts/mcp-turns-two/)).
+File Uploads will roll out soon in Claude. It sends PDFs, spreadsheets and images to a server without passing them through the context window. On the protocol side, file upload and download is a working group draft, short of beta ([MCP Blog](https://blog.modelcontextprotocol.io/posts/mcp-turns-two/)).
 
 Want each new layer explained as it ships? [Subscribe to The Trend Times](/) for one primary-source briefing per issue.
 
@@ -95,7 +95,7 @@ MCP tools return summaries assembled inside the Workspace boundary, which Google
 
 Quotas split into two tiers. Standard is free with public quotas, and Scaled bills only for usage above a daily free allowance from April 1, 2027 ([Google Workspace Updates](https://workspaceupdates.googleblog.com/2026/11/mcp-servers-cli-standardized-usage-tiers-now-available.html?hl=en_EN)). Google says over 99% of active developers already work within Standard.
 
-The controls make this a gateway rather than a pipe. Agents identify themselves during OAuth sign-in, so admins manage access centrally. Sensitive actions, such as reading an external file or sharing data, require a human confirmation. DLP rules and audit logs apply automatically, under Security > API Controls in the admin console.
+The controls make this a gateway rather than a pipe. Agents identify themselves during OAuth sign-in, so admins manage access centrally. Admins can set rules that make sensitive actions, such as reading an external file or sharing data, wait for a user confirmation. DLP rules and audit logs apply automatically, under Security > API Controls in the admin console.
 
 ## Failure Modes the Benchmark Records
 
@@ -121,7 +121,7 @@ Anthropic reports over 700 million monthly SDK downloads and over 10,000 MCP con
 
 MCPHallu is a benchmark, not production telemetry. Its 36 servers and task design differ from any real organisation's tool catalog, and its scores belong to specific model and server pairings ([arXiv](https://arxiv.org/abs/2611.07689v1)). A model's rank on your stack could differ.
 
-The 85% context saving is a vendor claim about what tool search "can" achieve, with no independent measurement published yet ([Anthropic](https://claude.com/resources/articles/skills-over-mcp-tasks-and-more)). The 99% Standard-tier figure describes developers before February 2027 enforcement moves agent traffic onto MCP and the CLI.
+The 85% context saving is a vendor claim about what tool search "can" achieve, with no independent measurement published yet ([Anthropic](https://claude.com/resources/articles/skills-over-mcp-tasks-and-more)). The 99% Standard-tier figure describes developers at the time of the announcement, ahead of the February 2027 enforcement date.
 
 ## Primary Sources Behind This Analysis
 
@@ -140,15 +140,15 @@ The release cadence sets when you pay. Specs ship on the last Tuesday of March a
 
 ### Trade-offs That Repay Their Cost
 
-- **Stateless servers** buy plain load balancing at the price of explicit state. List every place a server writes state and name the store it uses.
-- **Tool search** buys context room at the price of a selection step that can pick wrong. Log the `tools/list` payload size per server before adding a tenth connector.
-- **Elicitation forms** buy a human check at the price of a pause. Add one to every tool that deletes data or spends money.
-- **The Workspace MCP server and CLI** buy DLP and audit logs at the price of direct REST access. Move agent code off Workspace REST APIs before February 1, 2027.
+- List every place a server writes state, and name the store it uses, before you take the load balancer win.
+- Log the `tools/list` payload size per server before you add a tenth connector, and check that tool search still picks the right tools.
+- Add an elicitation form to every tool that deletes data or spends money, and measure how long users wait at the prompt.
+- Move agent code off Workspace REST APIs before February 1, 2027, so DLP rules and audit logs cover it.
 
 ### Trade-offs to Revisit at Every Release
 
-- **Server-shipped skills** update without a client release, so agent behaviour can change silently. Diff each server's `SKILL.md` set on update and rerun your evals.
-- **Task handles** can outlive their work. Set a timeout on every task handle and alert when one expires without a result.
-- **File uploads** rest on a draft that has not reached beta. Keep upload handling behind a feature flag until it ships in a spec version.
-- **Spec versions** change twice a year. Pin `MCP-Protocol-Version: 2026-07-28` in your client config and test the 2027-03-30 spec in a branch once Tier 1 SDK betas land.
-- **Leaderboard averages** hide subtype failures. Track pass rate on infeasible-goal tasks in your own eval set, and fail any run that claims success without a matching state change.
+- Diff each server's `SKILL.md` set on update and rerun your evals, because skills can change agent behaviour without a client release.
+- Set a timeout on every task handle and alert when one expires without a result.
+- Keep file upload handling behind a feature flag until the extension reaches a spec version.
+- Pin `MCP-Protocol-Version: 2026-07-28` in your client config and test the 2027-03-30 spec in a branch once Tier 1 SDK betas land.
+- Track pass rate on infeasible-goal tasks in your own eval set, and fail any run that claims success without a matching state change.
