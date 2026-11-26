@@ -2,7 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { SITE_TITLE } from '../consts';
+import { SITE_TITLE, CATEGORY_KEYS } from '../consts';
 
 export const prerender = false;
 
@@ -18,8 +18,10 @@ const CURRENT_TOP_LEVEL = new Set([
 ]);
 
 // Path only: the query string never decides the answer.
-const first = Astro.url.pathname.toLowerCase().replace(/^\/+|\/+$/g, '').split('/')[0];
-const gone = first !== '' && !CURRENT_TOP_LEVEL.has(first);
+const [first, second] = Astro.url.pathname.toLowerCase().replace(/^\/+|\/+$/g, '').split('/');
+// /category/<hub>/ is current; any other /category/<x>/ is a legacy WordPress archive.
+const legacyCategory = first === 'category' && second !== undefined && !(CATEGORY_KEYS as string[]).includes(second);
+const gone = (first !== '' && !CURRENT_TOP_LEVEL.has(first)) || legacyCategory;
 
 Astro.response.status = gone ? 410 : 404;
 if (gone) Astro.response.headers.set('x-robots-tag', 'noindex');
