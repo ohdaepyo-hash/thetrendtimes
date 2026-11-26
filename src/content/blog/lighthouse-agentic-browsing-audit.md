@@ -3,7 +3,6 @@ title: "Lighthouse Agentic Browsing: How Chrome Rates AI-Ready Sites"
 description: "Chrome's Lighthouse now scores sites for AI agents: llms.txt, WebMCP, accessibility and layout stability. What each check means and what to fix first."
 pubDate: 2026-11-05
 category: agents
-featured: true
 sources:
   - label: "Chrome for Developers: Agentic Browsing scoring"
     url: "https://developer.chrome.com/docs/lighthouse/agentic-browsing/scoring"

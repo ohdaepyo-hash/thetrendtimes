@@ -1,0 +1,51 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+export const prerender = false;
+
+// Current public routes. Anything else at the top level is a legacy WordPress URL
+// from the domain's previous owner (2018-2025) and must answer 410 Gone.
+// Add a new top-level route here when one is created (public/ folders count too).
+const CURRENT_TOP_LEVEL = new Set([
+	'about', 'contact', 'privacy', 'terms', 'disclaimer', 'blog', 'tools', 'api',
+	'rss.xml', 'sitemap-index.xml', 'sitemap.xml', 'sitemap-0.xml', 'robots.txt', 'ads.txt',
+	'favicon.svg', 'favicon.ico', 'og-image.png', 'apple-touch-icon.png',
+	'fonts', 'og', 'rss',
+	'_astro', '_worker.js', '_headers', '_redirects', 'cdn-cgi', '.well-known',
+]);
+
+// Path only: the query string never decides the answer.
+const first = Astro.url.pathname.toLowerCase().replace(/^\/+|\/+$/g, '').split('/')[0];
+const gone = first !== '' && !CURRENT_TOP_LEVEL.has(first);
+
+Astro.response.status = gone ? 410 : 404;
+if (gone) Astro.response.headers.set('x-robots-tag', 'noindex');
+const title = gone ? 'This page is gone' : 'Page not found';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${title} | ${SITE_TITLE}`} description={title} />
+		<meta name="robots" content="noindex" />
+	</head>
+	<body>
+		<Header />
+		<main id="top" class="max-w-[1380px] mx-auto px-5 md:px-10 xl:px-14">
+			<article class="max-w-[760px] mx-auto py-16">
+				<p class="eyebrow text-rust">{gone ? '410' : '404'}</p>
+				<h1 class="display text-[clamp(38px,6vw,72px)] leading-[1] tracking-[-.05em] mt-6">{title}</h1>
+				<p class="mt-6">
+					{gone
+						? 'This address belonged to an earlier site on this domain and has been removed for good.'
+						: 'We could not find that page.'}
+				</p>
+				<p class="mt-4"><a href="/">Go to the home page</a> or <a href="/blog/">browse the archive</a>.</p>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>
