@@ -16,6 +16,8 @@ const blog = defineCollection({
 		author: z.string().default("The Trend Times Editors"),
 		// Pin one post to the homepage cover. Falls back to the newest post.
 		featured: z.boolean().default(false),
+		// Article structure from docs/EDITORIAL_AND_SEO_GUIDELINES.md. Posts without it follow the legacy checklist rule.
+		structure: z.enum(['data-comparison', 'case-study', 'architecture-anatomy', 'field-checklist']).optional(),
 		// Evidence links shown as chips on the cover and listed under the article.
 		sources: z.array(z.object({ label: z.string(), url: z.string().url() })).default([]),
 	}),
