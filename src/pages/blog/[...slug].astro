@@ -4,18 +4,21 @@ import BlogPost from '../../layouts/BlogPost.astro';
 import { render } from 'astro:content';
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.id },
-		props: post,
-	}));
+	const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+	return posts.map((post) => {
+		// Three newest posts from the same category, topped up with the newest posts overall.
+		const others = posts.filter((p) => p !== post);
+		const same = others.filter((p) => p.data.category === post.data.category);
+		const related = [...new Set([...same, ...others])].slice(0, 3);
+		return { params: { slug: post.id }, props: { post, related } };
+	});
 }
-type Props = CollectionEntry<'blog'>;
+type Props = { post: CollectionEntry<'blog'>; related: CollectionEntry<'blog'>[] };
 
-const post = Astro.props;
+const { post, related } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BlogPost {...post.data}>
+<BlogPost {...post.data} related={related}>
 	<Content />
 </BlogPost>

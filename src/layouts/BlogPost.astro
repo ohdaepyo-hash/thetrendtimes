@@ -5,6 +5,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Newsletter from '../components/Newsletter.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import RelatedBriefings from '../components/RelatedBriefings.astro';
 import { SITE_TITLE, CATEGORIES, type Category } from '../consts';
 
 type PostData = CollectionEntry<'blog'>['data'];
@@ -15,11 +16,14 @@ type Props = Omit<PostData, 'category' | 'author' | 'featured' | 'sources'> & {
 	sources?: PostData['sources'];
 	eyebrow?: string;
 	showDate?: boolean;
+	related?: CollectionEntry<'blog'>[];
 };
 
-const { title, description, pubDate, updatedDate, heroImage, category, author = 'The Trend Times Editors', sources = [], showDate = true } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, category, author = 'The Trend Times Editors', sources = [], showDate = true, related = [] } = Astro.props;
 // Posts without a hero fall back to the card baked by scripts/generate-og.mjs; static pages keep the site default.
 const ogImage = heroImage ?? (category && Astro.params.slug ? `/og/${Astro.params.slug}.png` : undefined);
+// Posts show the same card at the top of the article; static pages have no hero.
+const heroAlt = category ? `Cover card for "${title}", a ${CATEGORIES[category]} briefing from The Trend Times` : '';
 const eyebrow = Astro.props.eyebrow ?? (category ? CATEGORIES[category].toUpperCase() : 'THE BRIEFING');
 ---
 
@@ -34,7 +38,13 @@ const eyebrow = Astro.props.eyebrow ?? (category ? CATEGORIES[category].toUpperC
 		<main id="top" class="max-w-[1380px] mx-auto px-5 md:px-10 xl:px-14">
 			<article class="max-w-[760px] mx-auto py-10 md:py-16">
 				<div class="flex flex-wrap items-center gap-3 eyebrow text-rust">
-					<span class="bg-rust text-white px-2.5 py-1.5">{eyebrow}</span>
+					{
+						category && !Astro.props.eyebrow ? (
+							<a href={`/category/${category}/`} class="bg-rust text-white px-2.5 py-1.5 hover:bg-ink">{eyebrow}</a>
+						) : (
+							<span class="bg-rust text-white px-2.5 py-1.5">{eyebrow}</span>
+						)
+					}
 					{showDate && <FormattedDate date={pubDate} />}
 				</div>
 				<h1 class="display text-[clamp(38px,6vw,72px)] leading-[1] tracking-[-.05em] mt-6">{title}</h1>
@@ -49,7 +59,11 @@ const eyebrow = Astro.props.eyebrow ?? (category ? CATEGORIES[category].toUpperC
 						)
 					}
 				</div>
-				{heroImage && <img class="w-full mt-8" width={1020} height={510} src={heroImage} alt="" />}
+				{
+					category && ogImage && (
+						<img class="w-full mt-8" width={1200} height={630} src={ogImage} alt={heroAlt} loading="eager" decoding="async" fetchpriority="high" />
+					)
+				}
 				<div class="article-body mt-10">
 					<slot />
 				</div>
@@ -67,6 +81,7 @@ const eyebrow = Astro.props.eyebrow ?? (category ? CATEGORIES[category].toUpperC
 						</div>
 					)
 				}
+				{related.length > 0 && <RelatedBriefings posts={related} />}
 				<div class="mt-14 pt-6 border-t border-ink flex flex-wrap justify-between gap-4">
 					<a href="/blog/" class="text-[11px] font-bold uppercase tracking-wider border-b border-rust pb-1 hover:text-rust">← Back to the archive</a>
 					<a href="mailto:editor@thetrendtimes.com" class="text-[11px] mono text-muted hover:text-rust">TIPS → EDITOR@THETRENDTIMES.COM</a>

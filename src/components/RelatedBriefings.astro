@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+import { CATEGORIES } from '../consts';
+
+interface Props {
+	posts: CollectionEntry<'blog'>[];
+}
+const { posts } = Astro.props;
+---
+
+<section class="article-body mt-10 pt-6 border-t hairline" aria-labelledby="related-briefings">
+	<h2 id="related-briefings">Related Briefings</h2>
+	<ul>
+		{
+			posts.map((p) => (
+				<li>
+					<a href={`/blog/${p.id}/`}>{p.data.title}</a>
+					<span class="block text-[11px] mono text-muted">
+						{CATEGORIES[p.data.category].toUpperCase()} · <FormattedDate date={p.data.pubDate} />
+					</span>
+				</li>
+			))
+		}
+	</ul>
+</section>

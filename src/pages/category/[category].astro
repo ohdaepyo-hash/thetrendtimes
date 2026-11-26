@@ -1,0 +1,64 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { SITE_TITLE, CATEGORIES, CATEGORY_BLURBS, CATEGORY_KEYS, readMinutes, type Category } from '../../consts';
+import { getCollection } from 'astro:content';
+
+export function getStaticPaths() {
+	return CATEGORY_KEYS.map((category) => ({ params: { category } }));
+}
+
+const category = Astro.params.category as Category;
+const name = CATEGORIES[category];
+const blurb = CATEGORY_BLURBS[category];
+const posts = (await getCollection('blog', (p) => p.data.category === category)).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${name} Briefings | ${SITE_TITLE}`} description={blurb} />
+	</head>
+	<body>
+		<Header />
+		<main id="top" class="max-w-[1380px] mx-auto px-5 md:px-10 xl:px-14">
+			<section class="py-10 md:py-16">
+				<div class="flex flex-wrap items-end justify-between gap-4 pb-7 border-b border-ink">
+					<div class="max-w-[760px]">
+						<div class="eyebrow text-rust mb-3">CATEGORY</div>
+						<h1 class="display text-[40px] sm:text-[64px] tracking-[-.045em] leading-none">{name}<span class="text-rust">.</span></h1>
+						<p class="text-sm text-muted leading-[1.8] mt-5">{blurb}</p>
+					</div>
+					<span class="mono text-[10px] text-muted">{String(posts.length).padStart(2, '0')} REPORTS / NEWEST FIRST</span>
+				</div>
+
+				{posts.length === 0 && <p class="text-sm text-muted py-8">No reports in this section yet. New briefings appear here as they are published.</p>}
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-8">
+					{
+						posts.map((post) => (
+							<article class="story-link py-7 border-b hairline">
+								<a href={`/blog/${post.id}/`} class="block">
+									<div class="flex justify-between gap-3 eyebrow text-rust">
+										<span class="text-muted"><FormattedDate date={post.data.pubDate} /></span>
+										<span class="text-muted">{readMinutes(post.body)} MIN READ</span>
+									</div>
+									<h2 class="story-title display text-[25px] sm:text-[27px] leading-[1.14] tracking-tight mt-4">{post.data.title}</h2>
+									<p class="text-[13px] text-muted leading-[1.7] mt-3">{post.data.description}</p>
+									<p class="mono text-[10px] mt-5 text-rust">READ THE REPORT ↗</p>
+								</a>
+							</article>
+						))
+					}
+				</div>
+				<p class="mt-10">
+					<a href="/blog/" class="text-[11px] font-bold uppercase tracking-wider border-b border-rust pb-1 hover:text-rust">See every briefing in the archive →</a>
+				</p>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
