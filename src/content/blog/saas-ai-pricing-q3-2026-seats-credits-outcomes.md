@@ -137,7 +137,7 @@ The counter-case deserves a hearing. Outcome pricing may be spreading in enterpr
 
 The verdict: keep the subscription as the anchor and sell AI as a metered quota inside it, the model in 55% of observable AI-native rows in the audit ([arXiv](https://arxiv.org/abs/2610.30701v2)). Report AI revenue only if your billing system meters AI as its own unit. Hold outcome pricing for work your product can attribute, which today means support-style resolutions.
 
-Watch large accounts, not the blended rate. All four vendors grew fastest in their biggest cohorts, and monday.com's NRR reached 114% above $50,000 in ARR against 108% overall ([monday.com](https://ir.monday.com/news-and-events/news-releases/news-details/2026/monday-com-Announces-Third-Quarter-2026-Results-new/default.aspx)).
+Watch large accounts, not the blended rate. The three vendors that break out cohorts each grew fastest in their biggest accounts, and monday.com's NRR reached 114% above $50,000 in ARR against 108% overall ([monday.com](https://ir.monday.com/news-and-events/news-releases/news-details/2026/monday-com-Announces-Third-Quarter-2026-Results-new/default.aspx)).
 
 ### Decide This Quarter
 
