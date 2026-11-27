@@ -1,6 +1,6 @@
 ---
 title: "SaaS AI Pricing in Q3 2026: Seats, Credits and Outcomes"
-description: "Compare Q3 2026 revenue, retention and AI ARR at four SaaS vendors with a 75-row pricing audit, then pick the AI billing model your data supports."
+description: "Compare Q3 2026 revenue, retention and AI disclosures at four SaaS vendors with a 75-row pricing audit, then pick the AI billing model your data supports."
 pubDate: 2026-11-28
 category: saas
 structure: data-comparison
@@ -49,9 +49,9 @@ The table pairs each figure with its source and reporting date. The first four r
 
 Sample notes: the vendor rows are company-reported and cover one quarter each. TCV means total contract value over the full contract term, not an annual figure. The audit row counts pricing pages, not customers or dollars, and the paper's v2 is dated 2026-11-03 ([arXiv](https://arxiv.org/abs/2610.30701v2)).
 
-## Where the Q3 Numbers Agree on Large-Account Expansion
+## Where the Q3 Numbers Agree on Existing-Account Expansion
 
-Past the blended numbers, all four releases tell one story. Growth comes from large customers spending more, while the long tail barely moves.
+Past the blended numbers, three of the four break out customer cohorts, and each shows growth concentrating in large accounts. All four describe expansion among existing customers as the main engine.
 
 At monday.com, customers above $50,000 in ARR grew 26% to 5,038 and posted NRR of 114% ([monday.com](https://ir.monday.com/news-and-events/news-releases/news-details/2026/monday-com-Announces-Third-Quarter-2026-Results-new/default.aspx)). Accounts above $100,000 grew 33% to 2,127, and those above $500,000 grew 58% to 123. Paid customers with more than 10 users grew only 5%. The largest single customer runs more than 87,000 seats.
 
@@ -61,7 +61,7 @@ Freshworks repeats it at a smaller scale. Customers above $100,000 in ARR grew 2
 
 Kaltura's AI story is an expansion story too. Of 15 deals that included AI offerings, 12 were expansions or renewals with existing customers ([Kaltura](https://investors.kaltura.com/news-releases/news-release-details/kaltura-announces-financial-results-third-quarter-2026)). Nine included Agentic Avatars and eight included Content Lab. The quarter also brought 11 six-figure deals and three seven-figure deals.
 
-The second point of agreement is where AI sits: on top of an existing subscription. Two of the four make this explicit. monday.com builds its AI ARR from credits, agents and vibe on a platform it still counts in users and seats. Kaltura sells AI into accounts it already serves.
+The second point of agreement is where AI sits: on top of an existing subscription. Two of the four make this explicit. monday.com builds its AI ARR from credits, agents and vibe on a platform it still counts in users and seats. Kaltura sells AI mostly into accounts it already serves.
 
 ## Where the Q3 Numbers Split on Retention and AI Disclosure
 
@@ -135,7 +135,7 @@ The counter-case deserves a hearing. Outcome pricing may be spreading in enterpr
 
 ## Pricing Verdict for B2B SaaS Teams
 
-The verdict: keep the seat and sell AI as a credit quota inside it, the pattern behind 55% of observable AI-native rows in the audit ([arXiv](https://arxiv.org/abs/2610.30701v2)). Report AI revenue only if your billing system meters AI as its own unit. Hold outcome pricing for work your product can attribute, which today means support-style resolutions.
+The verdict: keep the subscription as the anchor and sell AI as a metered quota inside it, the model in 55% of observable AI-native rows in the audit ([arXiv](https://arxiv.org/abs/2610.30701v2)). Report AI revenue only if your billing system meters AI as its own unit. Hold outcome pricing for work your product can attribute, which today means support-style resolutions.
 
 Watch large accounts, not the blended rate. All four vendors grew fastest in their biggest cohorts, and monday.com's NRR reached 114% above $50,000 in ARR against 108% overall ([monday.com](https://ir.monday.com/news-and-events/news-releases/news-details/2026/monday-com-Announces-Third-Quarter-2026-Results-new/default.aspx)).
 
